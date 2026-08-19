@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiosk Hochheim Mitte</title>
+  <style>
+    :root {
+      --bg-color: #0d131f;
+      --card-bg: #162032;
+      --card-border: #233047;
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --accent: #ffb703;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Scroll-Animation Styles */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Kacheln & Layout */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Admin Button (Nur Schloss) */
+    .admin-btn {
+      background: #233047;
+      border: none;
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Feature / Service Liste */
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .list-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+    }
+
+    /* Galerie Image */
+    .img-box {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0d131f;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .img-caption {
+      padding: 12px 4px 4px 4px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* Bewertungen */
+    .stars {
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .review-author {
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .review-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Angebote / Kategorien -->
+    <div class="list-container">
+      <div class="list-item reveal">
+        <span>🌙</span> Indische Gewürze
+      </div>
+      <div class="list-item reveal">
+        <span>📰</span> Zeitschriften & Tabakwaren
+      </div>
+      <div class="list-item reveal">
+        <span>🛡️</span> Snus & Nikotinbeutel
+      </div>
+      <div class="list-item reveal">
+        <span>😊</span> Freundlicher Service
+      </div>
+    </div>
+
+    <!-- Galerie & Produkte (Mit Schloss-Button) -->
+    <div class="card reveal">
+      <div class="card-header">
+        <h2 class="card-title"><span>📷</span> Galerie & Produkte</h2>
+        <button class="admin-btn" title="Admin">🔒</button>
+      </div>
+      <div class="img-box">
+        <img src="euer-kiosk.jpg" alt="Euer Kiosk">
+      </div>
+      <div class="img-caption">Euer Kiosk</div>
+    </div>
+
+    <!-- Bewertungen Header -->
+    <h2 class="reveal" style="margin-top: 10px;">Das sagen Kunden</h2>
+
+    <!-- Bewertungen Kacheln -->
+    <div class="card reveal">
+      <div class="review-author">
+        <span>Markus S.</span>
+        <span class="stars">★★★★★</span>
+      </div>
+      <p class="review-text">„Versende regelmäßig hier DPD Pakete, der Inhaber ist nett und alles geht recht flott.“</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="review-author">
+        <span>Caroline S.</span>
+        <span class="stars">★★★★★</span>
+      </div>
+      <p class="review-text">„Sehr guter und netter Service bezüglich Paketdienst. War im Urlaub und das Paket wurde an den Kiosk übergeben.“</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="review-author">
+        <span>A Sch</span>
+        <span class="stars">★★★★★</span>
+      </div>
+      <p class="review-text">„Lovely people running this place, they really care for their customers - you can even find superb Indian spices there!“</p>
+    </div>
+
+  </div>
+
+  <!-- Bereinigter Footer -->
+  <footer class="reveal">
+    <p>© 2026 Kiosk Hochheim Mitte</p>
+  </footer>
+
+  <!-- Scroll-Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12
+      });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
+
+</body>
+</html>

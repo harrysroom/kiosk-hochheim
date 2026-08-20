@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiosk Hochheim Mitte</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5efe8;  /* cremiger Hintergrund */
+      color: #1e1e2a;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Scroll-Animation */
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .scroll-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scroll-scale {
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .scroll-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    :root {
+      --primary: #d45a2e;
+      --primary-light: #e87a4a;
+      --secondary: #1e2b4f;
+      --accent: #e6a843;
+      --cream: #faf3ea;
+      --white: #ffffff;
+      --shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.10);
+      --radius: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header / Hero – mit Titel "Kiosk Hochheim Mitte" */
+    .hero {
+      background: var(--white);
+      padding: 50px 0 60px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+      border-bottom: 1px solid #ece3d9;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-content {
+      flex: 1 1 380px;
+    }
+
+    .hero-badge {
+      background: var(--primary);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 10px rgba(212, 90, 46, 0.25);
+    }
+
+    /* Titel geändert zu "Kiosk Hochheim Mitte" */
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #1e2b4f;
+      margin-bottom: 8px;
+    }
+    .hero h1 span {
+      color: var(--primary);
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #3d3d4a;
+      opacity: 0.8;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      background: white;
+      color: #1e2b4f;
+      text-decoration: none;
+      transition: 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 8px 18px -6px rgba(212, 90, 46, 0.35);
+    }
+    .btn-primary:hover {
+      background: #b84a24;
+      transform: translateY(-2px);
+    }
+
+    .btn-route {
+      background: #2b7a4b;
+      color: white;
+    }
+    .btn-route:hover {
+      background: #1f613a;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1.5px solid #d6cec4;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: #f0e8df;
+    }
+
+    .hero-stats {
+      flex: 1 1 240px;
+      background: var(--cream);
+      padding: 24px 22px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 1px solid #e8ddd2;
+    }
+
+    .stat-number {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1e2b4f;
+      margin-bottom: 12px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 22px 16px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: 0.2s;
+      border: 1px solid #ede6dd;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 32px -12px rgba(0,0,0,0.10);
+    }
+    .card i {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .open-hours {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 4px 12px;
+      border-left: 6px solid var(--primary);
+    }
+
+    .day-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 5px 0;
+      border-bottom: 1px solid #f0e8df;
+    }
+    .day-row .day { color: #3d3d4a; }
+    .day-row .time { font-weight: 600; color: #1e1e2a; }
+    .highlight-tag {
+      background: var(--accent);
+      color: #1e2b4f;
+      font-weight: 700;
+      font-size: 0.65rem;
+      padding: 2px 10px;
+      border-radius: 30px;
+      margin-left: 6px;
+    }
+
+    .contact-block {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid #ede6dd;
+      margin-top: 30px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+    .contact-item i {
+      font-size: 1.3rem;
+      color: var(--primary);
+      width: 32px;
+      text-align: center;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+      border-top: 5px solid var(--primary);
+      border: 1px solid #ede6dd;
+      border-top-width: 5px;
+    }
+    .stars { color: #e6a843; letter-spacing: 2px; margin-bottom: 6px; font-size: 0.9rem; }
+    .review-text { font-size: 0.9rem; line-height: 1.5; margin: 8px 0; color: #2d2d3a; }
+    .review-author { font-weight: 600; font-size: 0.85rem; color: var(--secondary); }
+
+    /* Admin Panel – mit Passwort 3636 (nicht öffentlich) */
+    .admin-panel {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      margin-top: 40px;
+      border: 1px solid #e2d7cc;
+    }
+
+    .admin-panel h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #1e2b4f;
+      margin-bottom: 16px;
+    }
+    .admin-panel h3 i { color: var(--primary); }
+
+    .admin-lock {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: #f5efe8;
+      padding: 12px 18px;
+      border-radius: 60px;
+      margin-bottom: 20px;
+    }
+    .admin-lock input {
+      background: white;
+      border: 1px solid #d6cec4;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      width: 130px;
+    }
+    .admin-lock input:focus { outline: none; border-color: var(--primary); }
+    .admin-lock .btn-small {
+      background: var(--primary);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .admin-lock .btn-small:hover { background: #b84a24; }
+    .admin-lock .status { font-size: 0.85rem; opacity: 0.7; }
+
+    .admin-content {
+      transition: 0.25s ease;
+    }
+    .admin-content.locked {
+      filter: blur(4px);
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.5;
+    }
+
+    .admin-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .admin-card {
+      background: #f9f4ef;
+      border-radius: 18px;
+      padding: 14px 18px;
+      flex: 1 1 180px;
+      border: 1px solid #e8ddd2;
+    }
+    .admin-card label {
+      font-weight: 500;
+      opacity: 0.7;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .admin-card input {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #d6cec4;
+      padding: 6px 0;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      color: #1e1e2a;
+    }
+    .admin-card input:focus {
+      outline: none;
+      border-bottom-color: var(--primary);
+    }
+    .admin-card .live-preview {
+      font-size: 0.8rem;
+      margin-top: 4px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .gallery-item {
+      background: #e8ddd2;
+      border-radius: 20px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      color: #3d3d4a;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d45a2e" width="36px" height="36px"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 32px;
+      border: 1px solid #d6cec4;
+    }
+    .gallery-item:nth-child(2) { background-color: #ddd2c6; }
+    .gallery-item:nth-child(3) { background-color: #d2c6b8; }
+    .gallery-item:nth-child(4) { background-color: #c6baab; }
+
+    .footer {
+      background: #1e2b4f;
+      color: #ccd4e0;
+      padding: 32px 0;
+      margin-top: 30px;
+      border-top: 4px solid var(--primary);
+    }
+    .footer a { color: #e6a843; text-decoration: none; }
+    .footer h4 { color: white; font-weight: 600; }
+
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero-grid { flex-direction: column; }
+      .section-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO: Titel = Kiosk Hochheim Mitte -->
+<header class="hero">
+  <div class="container hero-grid scroll-fade">
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-store"></i> Willkommen</span>
+      <h1>Kiosk <span>Hochheim Mitte</span></h1>
+      <p class="hero-sub"><i class="fas fa-map-pin" style="color: var(--primary);"></i> Alte Malzfabrik 1, 65239 Hochheim</p>
+      <div class="hero-actions">
+        <a href="tel:061466077487" class="btn btn-primary"><i class="fas fa-phone-alt"></i> 06146 6077487</a>
+        <!-- Route öffnet Google Maps direkt -->
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Alte+Malzfabrik+1+65239+Hochheim+am+Main" target="_blank" class="btn btn-route"><i class="fas fa-route"></i> Route</a>
+      </div>
+      <div style="margin-top: 18px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.9rem;">
+        <span><i class="fas fa-box" style="color: var(--primary);"></i> DPD · Hermes · UPS</span>
+        <span><i class="fas fa-clock" style="color: var(--primary);"></i> Mo–Fr bis 21:30</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-number">4,1</span> <span style="color: #e6a843;">★★★★</span></div>
+      <div class="stat-label">25 Bewertungen · Google</div>
+      <hr style="border-color: #d6cec4; margin: 12px 0;">
+      <div style="font-size: 0.85rem;"><i class="fas fa-tag" style="color: var(--primary);"></i> Paketshop · Snacks · Gewürze</div>
+    </div>
+  </div>
+</header>
+
+<!-- Öffnungszeiten -->
+<section class="container">
+  <div class="scroll-fade">
+    <h2 class="section-title"><i class="fas fa-clock" style="color: var(--primary);"></i> Öffnungszeiten</h2>
+    <div class="open-hours" id="openHoursDisplay">
+      <div class="day-row"><span class="day">Montag</span><span class="time">07:30 – 21:30</span></div>
+      <div class="day-row"><span class="day">Dienstag</span><span class="time">07:30 – 21:30</span></div>
+      <div class="day-row"><span class="day">Mittwoch</span><span class="time">07:30 – 21:30</span></div>
+      <div class="day-row"><span class="day">Donnerstag</span><span class="time">07:30 – 21:30</span></div>
+      <div class="day-row"><span class="day">Freitag</span><span class="time" id="friTimeDisplay">07:30 – 22:00 <span class="highlight-tag">+</span></span></div>
+      <div class="day-row"><span class="day">Samstag</span><span class="time">07:30 – 22:00 <span class="highlight-tag">+</span></span></div>
+      <div class="day-row"><span class="day">Sonntag</span><span class="time">12:00 – 18:00</span></div>
+    </div>
+  </div>
+
+  <div class="contact-block scroll-scale">
+    <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Alte Malzfabrik 1, 65239 Hochheim</div>
+    <div class="contact-item" id="phoneDisplay"><i class="fas fa-phone"></i> 06146 6077487</div>
+    <div><a href="https://www.google.com/maps/dir/?api=1&destination=Alte+Malzfabrik+1+65239+Hochheim+am+Main" target="_blank" class="btn btn-primary" style="padding: 8px 22px; font-size: 0.85rem;"><i class="fas fa-directions"></i> Anfahrt</a></div>
+  </div>
+</section>
+
+<!-- Sortiment -->
+<section class="container">
+  <div class="scroll-fade">
+    <h2 class="section-title"><i class="fas fa-cubes" style="color: var(--primary);"></i> Sortiment & Services</h2>
+    <div class="card-grid">
+      <div class="card"><i class="fas fa-shipping-fast"></i><h4>Paketshop</h4><span style="background:#eef0f3;padding:2px 12px;border-radius:30px;font-size:0.7rem;font-weight:600;color:var(--secondary);display:inline-block;margin-top:6px;">DPD · Hermes · UPS</span></div>
+      <div class="card"><i class="fas fa-wine-bottle"></i><h4>Kühle Getränke</h4></div>
+      <div class="card"><i class="fas fa-seedling"></i><h4>Indische Gewürze</h4></div>
+      <div class="card"><i class="fas fa-newspaper"></i><h4>Zeitschriften & Tabak</h4></div>
+      <div class="card"><i class="fas fa-smile"></i><h4>Snus & Nikotin</h4></div>
+      <div class="card"><i class="fas fa-hand-holding-heart"></i><h4>Freundlicher Service</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- Galerie -->
+<section class="container">
+  <div class="scroll-scale">
+    <h2 class="section-title"><i class="fas fa-images" style="color: var(--primary);"></i> Galerie & Produkte</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">Außen</div>
+      <div class="gallery-item">Innen</div>
+      <div class="gallery-item">Snacks</div>
+      <div class="gallery-item">Gewürze</div>
+    </div>
+  </div>
+</section>
+
+<!-- Rezensionen -->
+<section class="container">
+  <div class="scroll-fade">
+    <h2 class="section-title"><i class="fas fa-star" style="color: var(--accent);"></i> Das sagen Kunden</h2>
+    <div class="review-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">„Versende regelmäßig hier DPD Pakete, der Inhaber ist nett und alles geht recht flott.“</p><div class="review-author">— Markus S.</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">„Sehr guter und netter Service bezüglich Paketdienst. War im Urlaub und das Paket wurde an den Kiosk übergeben.“</p><div class="review-author">— Caroline S.</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">„Lovely people running this place, they really care for their customers – even superb Indian spices.“</p><div class="review-author">— A Sch</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Admin Dashboard – Passwort 3636 (nicht öffentlich) -->
+<section class="container">
+  <div class="admin-panel scroll-scale">
+    <h3><i class="fas fa-user-cog"></i> Admin Dashboard · Live bearbeiten</h3>
+    
+    <div class="admin-lock">
+      <i class="fas fa-lock" style="color: var(--primary);"></i>
+      <input type="password" id="adminPasswordInput" placeholder="Passwort" autocomplete="off">
+      <button class="btn-small" id="unlockAdminBtn">Entsperren</button>
+      <span class="status" id="lockStatus">🔒 Geschützt</span>
+    </div>
+
+    <div class="admin-content locked" id="adminContent">
+      <div class="admin-grid">
+        <div class="admin-card">
+          <label><i class="fas fa-clock"></i> Öffnungszeit (Fr)</label>
+          <input type="text" id="editFr" value="07:30 – 22:00" oninput="updateLivePreview()">
+          <div class="live-preview" id="previewFr">Fr: 07:30 – 22:00</div>
+        </div>
+        <div class="admin-card">
+          <label><i class="fas fa-phone"></i> Telefon</label>
+          <input type="text" id="editPhone" value="06146 6077487" oninput="updateLivePreview()">
+          <div class="live-preview" id="previewPhone">📞 06146 6077487</div>
+        </div>
+        <div class="admin-card">
+          <label><i class="fas fa-tag"></i> Highlight</label>
+          <input type="text" id="editHighlight" value="Paketshop · Snacks · Gewürze" oninput="updateLivePreview()">
+          <div class="live-preview" id="previewHighlight">✨ Paketshop · Snacks · Gewürze</div>
+        </div>
+      </div>
+      <p style="margin-top: 16px; opacity: 0.6; font-size: 0.8rem;"><i class="fas fa-sync-alt"></i> Änderungen sofort live sichtbar.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+    <div>
+      <h4>Kiosk Hochheim Mitte</h4>
+      <p style="font-size: 0.9rem;">Alte Malzfabrik 1, 65239 Hochheim am Main</p>
+      <p style="font-size: 0.9rem;"><i class="fas fa-phone"></i> <a href="tel:061466077487">06146 6077487</a></p>
+    </div>
+    <div style="font-size: 0.9rem;">
+      <p><i class="fas fa-copyright"></i> 2026</p>
+      <p><i class="fab fa-google"></i> 4,1 ★ (25) · <a href="#">Alle Rezensionen</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // Scroll Animation
+    const fadeElements = document.querySelectorAll('.scroll-fade, .scroll-scale');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    fadeElements.forEach(el => observer.observe(el));
+
+    // ----- Admin: Passwort 3636 (nicht öffentlich) -----
+    const adminContent = document.getElementById('adminContent');
+    const lockStatus = document.getElementById('lockStatus');
+    const unlockBtn = document.getElementById('unlockAdminBtn');
+    const pwdInput = document.getElementById('adminPasswordInput');
+    const correctPwd = '3636';
+
+    function setLock(locked) {
+      if (locked) {
+        adminContent.classList.add('locked');
+        lockStatus.innerHTML = '🔒 Geschützt';
+        lockStatus.style.color = '#b84a24';
+      } else {
+        adminContent.classList.remove('locked');
+        lockStatus.innerHTML = '🔓 Entsperrt (Live-Edit)';
+        lockStatus.style.color = '#2b7a4b';
+      }
+    }
+
+    unlockBtn.addEventListener('click', function() {
+      const entered = pwdInput.value.trim();
+      if (entered === correctPwd) {
+        setLock(false);
+        pwdInput.value = '';
+        pwdInput.placeholder = '✅ Zugriff';
+        setTimeout(() => { pwdInput.placeholder = 'Passwort'; }, 1800);
+      } else {
+        alert('❌ Falsches Passwort. Versuche es mit 3636.');
+        setLock(true);
+        pwdInput.value = '';
+      }
+    });
+
+    pwdInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') unlockBtn.click();
+    });
+
+    setLock(true); // Standard gesperrt
+
+    // Live Preview
+    window.updateLivePreview = function() {
+      const frVal = document.getElementById('editFr')?.value || '';
+      const phoneVal = document.getElementById('editPhone')?.value || '';
+      const highlightVal = document.getElementById('editHighlight')?.value || '';
+
+      const friTimeDisplay = document.getElementById('friTimeDisplay');
+      if (friTimeDisplay) {
+        const tagSpan = friTimeDisplay.querySelector('.highlight-tag');
+        if (tagSpan) {
+          friTimeDisplay.innerHTML = frVal + ' <span class="highlight-tag">+</span>';
+        } else {
+          friTimeDisplay.textContent = frVal;
+        }
+      }
+
+      const phoneDisplay = document.getElementById('phoneDisplay');
+      if (phoneDisplay) {
+        phoneDisplay.innerHTML = `<i class="fas fa-phone"></i> ${phoneVal}`;
+      }
+
+      document.getElementById('previewFr').textContent = 'Fr: ' + frVal;
+      document.getElementById('previewPhone').textContent = '📞 ' + phoneVal;
+      document.getElementById('previewHighlight').textContent = '✨ ' + highlightVal;
+
+      // Hero Statistik Highlight
+      const heroTag = document.querySelector('.hero-stats div:last-child');
+      if (heroTag) {
+        heroTag.innerHTML = `<i class="fas fa-tag" style="color: var(--primary);"></i> ${highlightVal}`;
+      }
+    };
+
+    window.updateLivePreview();
+  })();
+</script>
+
+</body>
+</html>
